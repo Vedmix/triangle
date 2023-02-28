@@ -1,6 +1,6 @@
 import math
 def perimeter(AB, BC, AC):
-     return '%.2f'%(AB+BC+AC)
+     return float('%.2f'%(AB+BC+AC))
 def square(AB, BC, AC):
      p=perimeter(AB, BC, AC)/2
      return '%.2f'%(math.sqrt(p*(p-AB)*(p-BC)*(p-AC)))
@@ -24,27 +24,28 @@ print('Информация о треугольнике:')
 if (AB+BC>AC) and (BC+AC>AB) and (AB+AC>BC):
      if AB == BC == AC:
           print('Тип: "Равносторонний треугольник"')
-          print('Площадь треугольника: ', (square(AB, BC, AC)))
+          print('Площадь треугольника: ', square(AB, BC, AC))
           print('Периметр треугольника: ', perimeter(AB, BC, AC))
      elif (AB!=BC==AC) or (AB==BC!=AC) or (AB!=AC==BC):
           print('Тип: "Равнобедренный треугольник"')
           print('Площадь треугольника: ', square(AB, BC, AC))
           print('Периметр треугольника: ', perimeter(AB, BC, AC))
-     list1=[AB, BC, AC]
-     min_side=min(list1)
-     mid_side=sum(list1)-min(list1)-max(list1)
-     max_side=max(list1)
-     if max_side**2==mid_side**2+min_side**2:
-          print('Тип: "Прямоугольный треугольник"')
-          print('Площадь треугольника: ',square(AB, BC, AC))
-          print('Периметр треугольника: ',perimeter(AB, BC, AC))
-     elif max_side**2<mid_side**2+min_side**2:
-          print('Тип: "Остроугольный треугольник"')
-          print('Площадь треугольника: ',square(AB, BC, AC))
-          print('Периметр треугольника: ',perimeter(AB, BC, AC))
-     elif max_side**2>mid_side**2+min_side**2:
-          print('Тип: "Тупоугольный треугольник"')
-          print('Площадь треугольника: ',square(AB, BC, AC))
-          print('Периметр треугольника: ',perimeter(AB, BC, AC))
+     else:
+          list1=[AB, BC, AC]
+          min_side=min(list1)
+          mid_side=sum(list1)-min(list1)-max(list1)
+          max_side=max(list1)
+          if max_side**2==mid_side**2+min_side**2:
+               print('Тип: "Прямоугольный треугольник"')
+               print('Площадь треугольника: ',square(AB, BC, AC))
+               print('Периметр треугольника: ',perimeter(AB, BC, AC))
+          elif max_side**2<mid_side**2+min_side**2:
+               print('Тип: "Остроугольный треугольник"')
+               print('Площадь треугольника: ',square(AB, BC, AC))
+               print('Периметр треугольника: ',perimeter(AB, BC, AC))
+          elif max_side**2>mid_side**2+min_side**2:
+               print('Тип: "Тупоугольный треугольник"')
+               print('Площадь треугольника: ',square(AB, BC, AC))
+               print('Периметр треугольника: ',perimeter(AB, BC, AC))
 else:
      print('Такого треугольника не существует!')
