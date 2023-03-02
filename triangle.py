@@ -1,11 +1,13 @@
+import matplotlib.pyplot as plt
 import math
 def perimeter(AB, BC, AC):
      return float('%.2f'%(AB+BC+AC))
 def square(AB, BC, AC):
      p=perimeter(AB, BC, AC)/2
      return '%.2f'%(math.sqrt(p*(p-AB)*(p-BC)*(p-AC)))
-
-choice=int(input('Введите тип ввода ( По координатам (Напиши 1) / По сторонам треугольника (Напиши 2) ) => '))
+print('Усложнённый вариант >> По координатам (Напиши 1)')
+print('Упрощенный вариант >> По сторонам треугольника (Напиши 2)')
+choice=int(input('Введите тип ввода => '))
 if choice==2:
      AB=float(input('Сторона АВ => '))
      BC=float(input('Сторона ВC => '))
@@ -49,3 +51,11 @@ if (AB+BC>AC) and (BC+AC>AB) and (AB+AC>BC):
                print('Периметр треугольника: ',perimeter(AB, BC, AC))
 else:
      print('Такого треугольника не существует!')
+
+x=[x1,x2,x3]
+y=[y1,y2,y3]
+fig, ax = plt.subplots()
+plt.fill(x,y)
+ax.grid()
+plt.show()
+
