@@ -38,6 +38,10 @@ AF=math.sqrt(2*AC**2+2*AB**2-BC**2)/2
 BD=math.sqrt(2*AC**2+2*BC**2-AB**2)/2
 CE=math.sqrt(2*AB**2+2*BC**2-AC**2)/2
 
+#min_circle_radius=(AB*BC)/(AB+BC+AC)
+#min_circle_radius=(AB+BC-AC)/2
+#min_circle_radius=(square(AB, BC, AC))/(perimeter(AB, BC, AC)/2)
+
 ax.text(((x2 + x3)/2)+0.05,((y2 + y3)/2), 'F',style ='italic',fontsize = 15, color="purple")
 ax.text(((x1 + x3)/2),((y1 + y3)/2)-0.05, 'D',style ='italic',fontsize = 15, color="purple")
 ax.text(((x1 + x2)/2)-0.05,((y1 + y2)/2), 'E',style ='italic',fontsize = 15, color="purple")
@@ -100,6 +104,8 @@ print('AF >> '+str('%.2f' %AF)+'см')
 print('BD >> '+str('%.2f' %BD)+'см')
 print('CE >> '+str('%.2f' %CE)+'см')
 
+#print('%.2f' %min_circle_radius)
+
 plt.plot(x,y, color='black')
 plt.plot(x1,y1, color='black')
 plt.plot(x,y,'o')
@@ -115,5 +121,5 @@ plt.plot(median_C_x,median_C_y, color='blue')
 plt.plot(median_C_x,median_C_y,'o')
 
 ax.grid()
-plt.title( 'Ваш треугольник:')
+plt.title('Ваш треугольник:')
 plt.show()
