@@ -38,6 +38,18 @@ AF=math.sqrt(2*AC**2+2*AB**2-BC**2)/2
 BD=math.sqrt(2*AC**2+2*BC**2-AB**2)/2
 CE=math.sqrt(2*AB**2+2*BC**2-AC**2)/2
 
+AB_A=y2-y1
+AB_B=x1-x2
+AB_C=x2*y1-x1*y2
+
+BC_A=y3-y2
+BC_B=x2-x3
+BC_C=x3*y2-x2*y3
+
+AC_A=y3-y1
+AC_B=x1-x3
+AC_C=x3*y1-x1*y3
+
 #min_circle_radius=(AB*BC)/(AB+BC+AC)
 #min_circle_radius=(AB+BC-AC)/2
 #min_circle_radius=(square(AB, BC, AC))/(perimeter(AB, BC, AC)/2)
@@ -104,7 +116,15 @@ print('AF >> '+str('%.2f' %AF)+'см')
 print('BD >> '+str('%.2f' %BD)+'см')
 print('CE >> '+str('%.2f' %CE)+'см')
 
+print(Fore.MAGENTA)
+
+print('Уравнения сторон треугольника:')
+print('AB >> '+'('+str(AB_A)+')'+'x + '+'('+str(AB_B)+')'+'y + '+'('+str(AB_C)+')'+" = 0")
+print('BC >> '+'('+str(BC_A)+')''x + '+'('+str(BC_B)+')'+'y + '+'('+str(BC_C)+')'+" = 0")
+print('AC >> '+'('+str(AC_A)+')'+'x + '+'('+str(AC_B)+')'+'y + '+'('+str(AC_C)+')'+" = 0")
+
 #print('%.2f' %min_circle_radius)
+# print(equation(x1,x2,y1,y2))
 
 plt.plot(x,y, color='black')
 plt.plot(x1,y1, color='black')
