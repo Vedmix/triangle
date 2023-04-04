@@ -3,13 +3,27 @@ import math
 from math import acos, degrees
 from colorama import init
 from colorama import Fore, Back, Style
-import numpy as np
+
 
 def perimeter(AB, BC, AC):
      return float((AB+BC+AC))
 def square(AB, BC, AC):
      p=perimeter(AB, BC, AC)/2
      return (math.sqrt(p*(p-AB)*(p-BC)*(p-AC)))
+def side(point_x_1,point_y_1,point_x_2,point_y_2):
+    side=math.sqrt(((point_x_1 - point_x_2) ** 2) + ((point_y_1 - point_y_2) ** 2))
+    return side
+def lenght_median(side1,side2,side3): #side3 вычитаем
+    lenght_median=math.sqrt(2*side1**2+2*side2**2-side3**2)/2
+    return lenght_median
+def angle(side1,side2,side3): #side3 вычитаем
+    angle = degrees(acos((side1 ** 2 + side2 ** 2 - side3 ** 2) / (2.0 * side1 * side2)))
+    return angle
+def equation_side(point_x_1,point_y_1,point_x_2,point_y_2):
+    A =float(point_y_2 - point_y_1)
+    B =float(point_x_1 - point_x_2)
+    C =float(point_x_2 * point_y_1 - point_x_1 * point_y_2)
+    return '('+str(A)+')'+'x + '+'('+str(B)+')'+'y + '+'('+str(C)+')'+' = 0'
 
 init()
 
@@ -27,31 +41,18 @@ y1,y2,y3=float(y1), float(y2), float(y3)
 if (x1==x2==x3) or (y1==y2==y3):
      print('Такого треугольника не существует!')
 
-AB=math.sqrt(((x1-x2)**2)+((y1-y2)**2))
-BC=math.sqrt(((x2-x3)**2)+((y2-y3)**2))
-AC=math.sqrt(((x1-x3)**2)+((y1-y3)**2))
+AB=side(point_x_1=x1,point_y_1=y1,point_x_2=x2,point_y_2=y2)
+BC=side(point_x_1=x2,point_y_1=y2,point_x_2=x3,point_y_2=y3)
+AC=side(point_x_1=x1,point_y_1=y1,point_x_2=x3,point_y_2=y3)
 
-angle_BAC=degrees(acos((AC**2+AB**2-BC**2)/(2.0 * AB * AC)))
-angle_ABC=degrees(acos((AC**2+BC**2-AB**2)/(2.0 * AC * BC)))
-angle_BCA=degrees(acos((AB**2+BC**2-AC**2)/(2.0 * AB * BC)))
+AF=lenght_median(side1=AC,side2=AB,side3=BC)#math.sqrt(2*AC**2+2*AB**2-BC**2)/2#AC AB BC
+BD=lenght_median(side1=AC,side2=BC,side3=AB)#math.sqrt(2*AC**2+2*BC**2-AB**2)/2#AC BC AB
+CE=lenght_median(side1=AB,side2=BC,side3=AC)#math.sqrt(2*AB**2+2*BC**2-AC**2)/2#AB BC AC
 
+angle_BAC=angle(side1=AC,side2=AB,side3=BC)#degrees(acos((AC**2+AB**2-BC**2)/(2.0 * AB * AC)))
+angle_ABC=angle(side1=AC,side2=BC,side3=AB)#degrees(acos((AC**2+BC**2-AB**2)/(2.0 * AC * BC)))
+angle_BCA=angle(side1=AB,side2=BC,side3=AC)#degrees(acos((AB**2+BC**2-AC**2)/(2.0 * AB * BC)))
 
-
-AF=math.sqrt(2*AC**2+2*AB**2-BC**2)/2
-BD=math.sqrt(2*AC**2+2*BC**2-AB**2)/2
-CE=math.sqrt(2*AB**2+2*BC**2-AC**2)/2
-
-AB_A=y2-y1
-AB_B=x1-x2
-AB_C=x2*y1-x1*y2
-
-BC_A=y3-y2
-BC_B=x2-x3
-BC_C=x3*y2-x2*y3
-
-AC_A=y3-y1
-AC_B=x1-x3
-AC_C=x3*y1-x1*y3
 
 # наименование точек
 fig, ax = plt.subplots()
@@ -63,8 +64,6 @@ ax.text(x3+0.05,y3-0.05, 'C',style ='italic',fontsize = 15, color="purple")
 ax.text(((x2 + x3)/2)+0.05,((y2 + y3)/2), 'F',style ='italic',fontsize = 15, color="purple")
 ax.text(((x1 + x3)/2),((y1 + y3)/2)-0.05, 'D',style ='italic',fontsize = 15, color="purple")
 ax.text(((x1 + x2)/2)-0.05,((y1 + y2)/2), 'E',style ='italic',fontsize = 15, color="purple")
-
-
 
 #Медианы углов А, В, С
 mid_BC_x,mid_BC_y=((x2 + x3)/2),((y2 + y3)/2)
@@ -138,11 +137,14 @@ print('CE >> '+str('%.2f' %CE)+'см')
 print(Fore.MAGENTA)
 
 print('Уравнения сторон треугольника:')
-print('AB >> '+'('+str(AB_A)+')'+'x + '+'('+str(AB_B)+')'+'y + '+'('+str(AB_C)+')'+" = 0")
-print('BC >> '+'('+str(BC_A)+')''x + '+'('+str(BC_B)+')'+'y + '+'('+str(BC_C)+')'+" = 0")
-print('AC >> '+'('+str(AC_A)+')'+'x + '+'('+str(AC_B)+')'+'y + '+'('+str(AC_C)+')'+" = 0")
+print('AB >> '+ equation_side(point_x_1=x1,point_y_1=y1,point_x_2=x2,point_y_2=y2))
+print('BC >> '+ equation_side(point_x_1=x2,point_y_1=y2,point_x_2=x3,point_y_2=y3))
+print('AC >> '+ equation_side(point_x_1=x1,point_y_1=y1,point_x_2=x3,point_y_2=y3))
 
-print(''+str(r))
+
+
+
+#print(''+str(r))
 x, y = [x1, x2, x3], [y1, y2, y3]
 x1, y1 = [x1, x3], [y1, y3]
 
