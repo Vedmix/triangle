@@ -25,143 +25,148 @@ def equation_side(point_x_1,point_y_1,point_x_2,point_y_2):
     C =float(point_x_2 * point_y_1 - point_x_1 * point_y_2)
     return '('+str(A)+')'+'x + '+'('+str(B)+')'+'y + '+'('+str(C)+')'+' = 0'
 
-init()
+while True:
 
-print(Fore.CYAN)
+    init()
 
-print('Введите координаты точек: ')
+    print(Fore.CYAN)
 
-x1, y1= input('Точка А => ').split(';')
-x2, y2= input('Точка B => ').split(';')
-x3, y3= input('Точка C => ').split(';')
+    print('Введите координаты точек: ')
 
-x1,x2,x3=float(x1), float(x2), float(x3)
-y1,y2,y3=float(y1), float(y2), float(y3)
+    x1, y1= input('Точка А => ').split(';')
+    x2, y2= input('Точка B => ').split(';')
+    x3, y3= input('Точка C => ').split(';')
 
-if (x1==x2==x3) or (y1==y2==y3):
-     print('Такого треугольника не существует!')
+    x1,x2,x3=float(x1), float(x2), float(x3)
+    y1,y2,y3=float(y1), float(y2), float(y3)
 
-AB=side(point_x_1=x1,point_y_1=y1,point_x_2=x2,point_y_2=y2)
-BC=side(point_x_1=x2,point_y_1=y2,point_x_2=x3,point_y_2=y3)
-AC=side(point_x_1=x1,point_y_1=y1,point_x_2=x3,point_y_2=y3)
+    if (x1==x2==x3) or (y1==y2==y3):
+         print('Такого треугольника не существует!')
+         continue
 
-AF=lenght_median(side1=AC,side2=AB,side3=BC)#math.sqrt(2*AC**2+2*AB**2-BC**2)/2#AC AB BC
-BD=lenght_median(side1=AC,side2=BC,side3=AB)#math.sqrt(2*AC**2+2*BC**2-AB**2)/2#AC BC AB
-CE=lenght_median(side1=AB,side2=BC,side3=AC)#math.sqrt(2*AB**2+2*BC**2-AC**2)/2#AB BC AC
+    AB=side(point_x_1=x1,point_y_1=y1,point_x_2=x2,point_y_2=y2)
+    BC=side(point_x_1=x2,point_y_1=y2,point_x_2=x3,point_y_2=y3)
+    AC=side(point_x_1=x1,point_y_1=y1,point_x_2=x3,point_y_2=y3)
 
-angle_BAC=angle(side1=AC,side2=AB,side3=BC)#degrees(acos((AC**2+AB**2-BC**2)/(2.0 * AB * AC)))
-angle_ABC=angle(side1=AC,side2=BC,side3=AB)#degrees(acos((AC**2+BC**2-AB**2)/(2.0 * AC * BC)))
-angle_BCA=angle(side1=AB,side2=BC,side3=AC)#degrees(acos((AB**2+BC**2-AC**2)/(2.0 * AB * BC)))
+    AF=lenght_median(side1=AC,side2=AB,side3=BC)#math.sqrt(2*AC**2+2*AB**2-BC**2)/2#AC AB BC
+    BD=lenght_median(side1=AC,side2=BC,side3=AB)#math.sqrt(2*AC**2+2*BC**2-AB**2)/2#AC BC AB
+    CE=lenght_median(side1=AB,side2=BC,side3=AC)#math.sqrt(2*AB**2+2*BC**2-AC**2)/2#AB BC AC
 
-
-# наименование точек
-fig, ax = plt.subplots()
-
-ax.text(x1-0.05,y1-0.05, 'A',style ='italic',fontsize = 15, color="purple")
-ax.text(x2-0.05,y2+0.05, 'B',style ='italic',fontsize = 15, color="purple")
-ax.text(x3+0.05,y3-0.05, 'C',style ='italic',fontsize = 15, color="purple")
-
-ax.text(((x2 + x3)/2)+0.05,((y2 + y3)/2), 'F',style ='italic',fontsize = 15, color="purple")
-ax.text(((x1 + x3)/2),((y1 + y3)/2)-0.05, 'D',style ='italic',fontsize = 15, color="purple")
-ax.text(((x1 + x2)/2)-0.05,((y1 + y2)/2), 'E',style ='italic',fontsize = 15, color="purple")
-
-#Медианы углов А, В, С
-mid_BC_x,mid_BC_y=((x2 + x3)/2),((y2 + y3)/2)
-median_A_x,median_A_y=[x1,mid_BC_x],[y1,mid_BC_y]
-
-mid_AC_x,mid_AC_y=((x1 + x3)/2),((y1 + y3)/2)
-median_B_x,median_B_y=[x2,mid_AC_x],[y2,mid_AC_y]
-
-mid_AB_x,mid_AB_y=((x1 + x2)/2),((y1 + y2)/2)
-median_C_x,median_C_y=[x3,mid_AB_x],[y3,mid_AB_y]
-
-# Создание окружности для прямоугольных треуголиков
-if (angle_BAC==90) or (angle_ABC==90) or (angle_BCA==90):
-    hypotenuse=max(AB,BC,AC)
-    if hypotenuse==AB:
-        c_x =(x1+x2)/2
-        c_y =(y1+y2)/2
-    elif hypotenuse==BC:
-        c_x =(x2+x3)/2
-        c_y =(y2+y3)/2
-    elif hypotenuse==AC:
-        c_x =(x1+x3)/2
-        c_y =(y1+y3)/2
-    r=hypotenuse/2
-    circle = plt.Circle((c_x,c_y), r, color='b', fill=False)
-plt.gca().add_patch(circle)
-
-print(Fore.GREEN)
-
-print('Информация о треугольнике:')
-if (AB+BC>AC) and (BC+AC>AB) and (AB+AC>BC):
-     if AB == BC == AC:
-          print('Тип >> "Равносторонний треугольник"')
-     elif (angle_BAC==90) or (angle_ABC==90) or (angle_BCA==90):
-          print('Тип >> "Прямоугольный треугольник"')
-     elif (angle_BAC<90) and (angle_ABC<90) and (angle_BCA<90):
-          print('Тип >> "Остроугольный треугольник"')
-     elif (angle_BAC > 90) or (angle_ABC > 90) or (angle_BCA > 90):
-          print('Тип >> "Тупоугольный треугольник"')
-     elif (AB!=BC==AC) or (AB==BC!=AC) or (AB==AC!=BC):
-          print('Тип >> Равнобедренный треугольник')
-     print('Площадь треугольника >> '+str('%.2f' %square(AB, BC, AC))+'см')
-     print('Периметр треугольника >> '+str('%.2f' %perimeter(AB, BC, AC))+'см')
-
-else:
-     print('Такого треугольника не существует!')
+    angle_BAC=angle(side1=AC,side2=AB,side3=BC)#degrees(acos((AC**2+AB**2-BC**2)/(2.0 * AB * AC)))
+    angle_ABC=angle(side1=AC,side2=BC,side3=AB)#degrees(acos((AC**2+BC**2-AB**2)/(2.0 * AC * BC)))
+    angle_BCA=angle(side1=AB,side2=BC,side3=AC)#degrees(acos((AB**2+BC**2-AC**2)/(2.0 * AB * BC)))
 
 
+    # наименование точек
+    fig, ax = plt.subplots()
 
-print(Fore.BLUE)
+    ax.text(x1-0.05,y1-0.05, 'A',style ='italic',fontsize = 15, color="purple")
+    ax.text(x2-0.05,y2+0.05, 'B',style ='italic',fontsize = 15, color="purple")
+    ax.text(x3+0.05,y3-0.05, 'C',style ='italic',fontsize = 15, color="purple")
 
-print('Углы треугольника:')
-print('∠BAC >> '+str('%.2f' %angle_BAC)+'°')
-print('∠ABC >> '+str('%.2f' %angle_ABC)+'°')
-print('∠BCA >> '+str('%.2f' %angle_BCA)+'°')
+    ax.text(((x2 + x3)/2)+0.05,((y2 + y3)/2), 'F',style ='italic',fontsize = 15, color="purple")
+    ax.text(((x1 + x3)/2),((y1 + y3)/2)-0.05, 'D',style ='italic',fontsize = 15, color="purple")
+    ax.text(((x1 + x2)/2)-0.05,((y1 + y2)/2), 'E',style ='italic',fontsize = 15, color="purple")
 
-print(Fore.MAGENTA)
+    #Медианы углов А, В, С
+    mid_BC_x,mid_BC_y=((x2 + x3)/2),((y2 + y3)/2)
+    median_A_x,median_A_y=[x1,mid_BC_x],[y1,mid_BC_y]
 
-print('Стороны треугольника:')
-print('АВ >> '+str('%.2f' %AB)+'см')
-print('ВC >> '+str('%.2f' %BC)+'см')
-print('АC >> '+str('%.2f' %AC)+'см')
+    mid_AC_x,mid_AC_y=((x1 + x3)/2),((y1 + y3)/2)
+    median_B_x,median_B_y=[x2,mid_AC_x],[y2,mid_AC_y]
 
-print(Fore.MAGENTA)
+    mid_AB_x,mid_AB_y=((x1 + x2)/2),((y1 + y2)/2)
+    median_C_x,median_C_y=[x3,mid_AB_x],[y3,mid_AB_y]
 
-print('Длины медиан:')
-print('AF >> '+str('%.2f' %AF)+'см')
-print('BD >> '+str('%.2f' %BD)+'см')
-print('CE >> '+str('%.2f' %CE)+'см')
+    # Создание окружности для прямоугольных треуголиков
+    if (angle_BAC==90) or (angle_ABC==90) or (angle_BCA==90):
+        hypotenuse=max(AB,BC,AC)
+        if hypotenuse==AB:
+            c_x =(x1+x2)/2
+            c_y =(y1+y2)/2
+        elif hypotenuse==BC:
+            c_x =(x2+x3)/2
+            c_y =(y2+y3)/2
+        elif hypotenuse==AC:
+            c_x =(x1+x3)/2
+            c_y =(y1+y3)/2
+        r=hypotenuse/2
+        circle = plt.Circle((c_x,c_y), r, color='b', fill=False)
+    plt.gca().add_patch(circle)
 
-print(Fore.MAGENTA)
+    print(Fore.GREEN)
 
-print('Уравнения сторон треугольника:')
-print('AB >> '+ equation_side(point_x_1=x1,point_y_1=y1,point_x_2=x2,point_y_2=y2))
-print('BC >> '+ equation_side(point_x_1=x2,point_y_1=y2,point_x_2=x3,point_y_2=y3))
-print('AC >> '+ equation_side(point_x_1=x1,point_y_1=y1,point_x_2=x3,point_y_2=y3))
+    print('Информация о треугольнике:')
+    if (AB+BC>AC) and (BC+AC>AB) and (AB+AC>BC):
+         if AB == BC == AC:
+              print('Тип >> "Равносторонний треугольник"')
+         elif (angle_BAC==90) or (angle_ABC==90) or (angle_BCA==90):
+              print('Тип >> "Прямоугольный треугольник"')
+         elif (angle_BAC<90) and (angle_ABC<90) and (angle_BCA<90):
+              print('Тип >> "Остроугольный треугольник"')
+         elif (angle_BAC > 90) or (angle_ABC > 90) or (angle_BCA > 90):
+              print('Тип >> "Тупоугольный треугольник"')
+         elif (AB!=BC==AC) or (AB==BC!=AC) or (AB==AC!=BC):
+              print('Тип >> Равнобедренный треугольник')
+         print('Площадь треугольника >> '+str('%.2f' %square(AB, BC, AC))+'см')
+         print('Периметр треугольника >> '+str('%.2f' %perimeter(AB, BC, AC))+'см')
+
+    else:
+         print('Такого треугольника не существует!')
+         continue
 
 
 
+    print(Fore.BLUE)
 
-#print(''+str(r))
-x, y = [x1, x2, x3], [y1, y2, y3]
-x1, y1 = [x1, x3], [y1, y3]
+    print('Углы треугольника:')
+    print('∠BAC >> '+str('%.2f' %angle_BAC)+'°')
+    print('∠ABC >> '+str('%.2f' %angle_ABC)+'°')
+    print('∠BCA >> '+str('%.2f' %angle_BCA)+'°')
 
-plt.plot(x,y, color='black')
-plt.plot(x1,y1, color='black')
-plt.plot(x,y,'o')
-plt.plot(x1,y1,'o')
+    print(Fore.MAGENTA)
 
-plt.plot(median_A_x,median_A_y, color='blue')
-plt.plot(median_A_x,median_A_y,'o')
+    print('Стороны треугольника:')
+    print('АВ >> '+str('%.2f' %AB)+'см')
+    print('ВC >> '+str('%.2f' %BC)+'см')
+    print('АC >> '+str('%.2f' %AC)+'см')
 
-plt.plot(median_B_x,median_B_y, color='blue')
-plt.plot(median_B_x,median_B_y,'o')
+    print(Fore.MAGENTA)
 
-plt.plot(median_C_x,median_C_y, color='blue')
-plt.plot(median_C_x,median_C_y,'o')
+    print('Длины медиан:')
+    print('AF >> '+str('%.2f' %AF)+'см')
+    print('BD >> '+str('%.2f' %BD)+'см')
+    print('CE >> '+str('%.2f' %CE)+'см')
 
-ax.grid()
-plt.title('Ваш треугольник:')
-plt.show()
+    print(Fore.MAGENTA)
+
+    print('Уравнения сторон треугольника:')
+    print('AB >> '+ equation_side(point_x_1=x1,point_y_1=y1,point_x_2=x2,point_y_2=y2))
+    print('BC >> '+ equation_side(point_x_1=x2,point_y_1=y2,point_x_2=x3,point_y_2=y3))
+    print('AC >> '+ equation_side(point_x_1=x1,point_y_1=y1,point_x_2=x3,point_y_2=y3))
+
+
+
+
+    #print(''+str(r))
+    x, y = [x1, x2, x3], [y1, y2, y3]
+    x1, y1 = [x1, x3], [y1, y3]
+
+    plt.plot(x,y, color='black')
+    plt.plot(x1,y1, color='black')
+    plt.plot(x,y,'o')
+    plt.plot(x1,y1,'o')
+
+    plt.plot(median_A_x,median_A_y, color='blue')
+    plt.plot(median_A_x,median_A_y,'o')
+
+    plt.plot(median_B_x,median_B_y, color='blue')
+    plt.plot(median_B_x,median_B_y,'o')
+
+    plt.plot(median_C_x,median_C_y, color='blue')
+    plt.plot(median_C_x,median_C_y,'o')
+
+    ax.grid()
+    plt.title('Ваш треугольник:')
+    plt.show()
+    break
