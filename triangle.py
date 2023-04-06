@@ -221,6 +221,18 @@ while True:
         angle_ODA = angle(side1=DO, side2=AD, side3=AO)  # О даа...
         angle_ADC = angle_CDO + angle_ODA
 
+        angle_BOA=angle(side1=BO, side2=AO, side3=AB)
+        angle_COD=angle(side1=CO, side2=DO, side3=CD)
+        print('информация о четырехугольнике')
+        if (AB==BC==CD==AD) and (round(angle_BAD,2)==round(angle_ABC,2)==round(angle_BCD,2)==round(angle_ADC,2)==90.00):
+            print('Тип >> "Квадрат"')
+        elif ((AB==CD) and (BC==AD)) and (round(angle_BAD,2)==round(angle_ABC,2)==round(angle_BCD,2)==round(angle_ADC,2)==90.00):
+            print('Тип >> "Прямоугольник"')
+        elif ((AB==CD) and (BC==AD)) and ((round(angle_BAD,2)==round(angle_BCD,2)) and (round(angle_ABC,2)==round(angle_ADC,2)==90.00)):
+            print('Тип >> "Параллелограмм"')
+        elif ((AB==CD) and (BC==AD)) and (round(angle_BOA,2)==round(angle_COD,2)==90.00):
+            print('Тип >> "Ромб"')
+
         print(AB)
         print(BC)
         print(CD)
