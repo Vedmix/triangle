@@ -232,7 +232,7 @@ while True:
         # BCO=square(side1=BO, side2=BC, side3=CO)
         # COD=square(side1=CO, side2=CD, side3=DO)
         # DOA=square(side1=DO, side2=AO, side3=AD)
-        
+
         print('информация о четырехугольнике')
 
         if (round(ABC, 2) + round(DAB, 2) == 180):
@@ -245,46 +245,39 @@ while True:
         else:
             II_BC_AD = False
 
-        while True:
-            if  (round(DAB, 2) == round(ABC, 2) == round(BCD, 2) == round(CDA, 2) == 90.00):
-                if (AB == BC == CD == AD):
-                    print('Тип >> "Квадрат"')
-                    break
-                elif ((AB == CD) and (BC == AD)):
-                    print('Тип >> "Прямоугольник"')
-                    break
-            elif ((AB**2==AO**2+BO**2)==(BC**2==CO**2+BO**2)==(CD**2==CO**2+DO**2)==(AD**2==DO**2+AO**2)):
-                if  (AB == BC == CD == AD):
-                    print('Тип >> "Ромб"')
-                    break
-                elif (((AB==BC) and (CD==AD)) or ((BC==CD) and (AB==AD))):
-                    print('Тип >> "Дельтоид"')
-                    break
-            elif ((AB == CD) and (BC == AD)) and ((round(DAB, 2) == round(BCD, 2)) and (round(ABC, 2) == round(CDA, 2))) and ((II_AB_CD == True) and (II_BC_AD==True)):
-                print('Тип >> "Параллелограмм"')
-                break
-            elif (II_AB_CD==II_BC_AD==False) and (AB != BC != CD != AD):
-                print('Тип >> "Произвольный четырехугольник"')
-                break
-            elif ((II_BC_AD == True) or (II_AB_CD == True)):
-                if ((AB==CD) or (BC==AD)):
-                    print('Тип >> "Равнобедренная трапеция"')
-                    break
-                elif (round(DAB, 2) == round(ABC, 2)== 90.00) or(round(BCD, 2) == round(CDA, 2) == 90.00):
-                    print('Тип >> "Прямоугольная трапеция"')
-                    break
-                else:
-                    print('Тип >> "Произвольная трапеция"')
-                    break
+
+        if  (round(DAB, 2) == round(ABC, 2) == round(BCD, 2) == round(CDA, 2) == 90.00):
+            if (AB == BC == CD == AD):
+                print('Тип >> "Квадрат"')
+
+            elif ((AB == CD) and (BC == AD)):
+                print('Тип >> "Прямоугольник"')
+
+        elif ((AB**2==AO**2+BO**2)==(BC**2==CO**2+BO**2)==(CD**2==CO**2+DO**2)==(AD**2==DO**2+AO**2)):
+            if  (AB == BC == CD == AD):
+                print('Тип >> "Ромб"')
+
+            elif (((AB==BC) and (CD==AD)) or ((BC==CD) and (AB==AD))):
+                print('Тип >> "Дельтоид"')
+
+        elif ((AB == CD) and (BC == AD)) and ((round(DAB, 2) == round(BCD, 2)) and (round(ABC, 2) == round(CDA, 2))) and ((II_AB_CD == True) and (II_BC_AD==True)):
+            print('Тип >> "Параллелограмм"')
+
+        elif (II_AB_CD==II_BC_AD==False) and (AB != BC != CD != AD):
+            print('Тип >> "Произвольный четырехугольник"')
+
+        if ((II_BC_AD == True) or (II_AB_CD == True)):
+            if ((AB==CD) or (BC==AD)):
+                print('Тип >> "Равнобедренная трапеция"')
+
+            elif (round(DAB, 2) == round(ABC, 2)== 90.00) or(round(BCD, 2) == round(CDA, 2) == 90.00):
+                print('Тип >> "Прямоугольная трапеция"')
+
+            else:
+                print('Тип >> "Произвольная трапеция"')
 
 
 
-
-
-
-
-        print(II_AB_CD)
-        print(II_BC_AD)
         print(AB)
         print(BC)
         print(CD)
@@ -301,12 +294,19 @@ while True:
         print('∠DAB >> ' + str('%.2f' % DAB) + '°')
 
         x, y = [x1, x2, x3, x4], [y1, y2, y3, y4]
-        x1, y1 = [x1, x4], [y1, y4]
+        x11, y11 = [x1, x4], [y1, y4]
+        x111, y111= [x1,x3], [y1,y3]
+        x1111, y1111= [x2,x4], [y2,y4]
 
         plt.plot(x, y, color='black')
-        plt.plot(x1, y1, color='black')
+        plt.plot(x11, y11, color='black')
+        plt.plot(x111, y111, color='blue')
+        plt.plot(x1111, y1111, color='blue')
+
         plt.plot(x, y, 'o')
-        plt.plot(x1, y1, 'o')
+        plt.plot(x11, y11, 'o')
+        plt.plot(x111, y111, 'o')
+        plt.plot(x1111, y1111, 'o')
 
         plt.title('Ваш четырехугольник:')
         plt.show()
