@@ -194,6 +194,10 @@ while True:
         x1, x2, x3, x4 = float(x1), float(x2), float(x3), float(x4)
         y1, y2, y3, y4 = float(y1), float(y2), float(y3), float(y4)
 
+        if (x1 == x2 == x3==x4) or (y1 == y2 == y3==y4):
+            print('Такого четырехугольника не существует!')
+            continue
+
         AB = side(point_x_1=x1, point_y_1=y1, point_x_2=x2, point_y_2=y2)
         BC = side(point_x_1=x2, point_y_1=y2, point_x_2=x3, point_y_2=y3)
         CD = side(point_x_1=x3, point_y_1=y3, point_x_2=x4, point_y_2=y4)
@@ -248,39 +252,46 @@ while True:
 
         angle_a = angle(BO, AO, AB)
         h=side(x2,y2,x2,x1)
+        while True:
+            if (round(DAB, 2) == round(ABC, 2) == round(BCD, 2) == round(CDA, 2) == 90.00):
+                if (AB == BC == CD == AD):
+                    print('Тип >> "Квадрат"')
+                    print('Площадь четырехтреугольника >> ' + str('%.2f' % (AB ** 2)) + 'см')
+                    break
+                elif ((AB == CD) and (BC == AD)):
+                    print('Тип >> "Прямоугольник"')
+                    print('Площадь четырехтреугольника >> ' + str('%.2f' % (AB * BC)) + 'см')
+                    break
+            elif ((AB ** 2 == AO ** 2 + BO ** 2) == (BC ** 2 == CO ** 2 + BO ** 2) == (CD ** 2 == CO ** 2 + DO ** 2) == (AD ** 2 == DO ** 2 + AO ** 2)):
+                if (AB == BC == CD == AD):
+                    print('Тип >> "Ромб"')
+                    print('Площадь четырехтреугольника >> ' + str('%.2f' % (((AC * BD) / 2))) + 'см')
+                    break
+                elif (((AB == BC) and (CD == AD)) or ((BC == CD) and (AB == AD))):
+                    print('Тип >> "Дельтоид"')
+                    print('Площадь четырехтреугольника >> ' + str('%.2f' % (((AC * BD) / 2))) + 'см')
+                    break
+            elif ((AB == CD) and (BC == AD)) and ((round(DAB, 2) == round(BCD, 2)) and (round(ABC, 2) == round(CDA, 2))) and ((II_AB_CD == True) and (II_BC_AD == True)):
+                print('Тип >> "Параллелограмм"')
+                print('Площадь четырехтреугольника >> ' + str('%.2f' % ((math.sin(CDA) * (AB * AD)))) + 'см')
+                break
+            elif (II_AB_CD == II_BC_AD == False) and (AB != BC != CD != AD):
+                print('Тип >> "Произвольный четырехугольник"')
+                break
+            if ((II_BC_AD == True) or (II_AB_CD == True)):
+                if ((AB == CD) or (BC == AD)):
+                    print('Тип >> "Равнобедренная трапеция"')
+                    print('Площадь четырехтреугольника >> ' + str('%.2f' % ((((BC + AD) / 2) * h))) + 'см')
+                    break
+                elif (round(DAB, 2) == round(ABC, 2) == 90.00) or (round(BCD, 2) == round(CDA, 2) == 90.00):
+                    print('Тип >> "Прямоугольная трапеция"')
+                    print('Площадь четырехтреугольника >> ' + str('%.2f' % ((((BC + AD) / 2) * h))) + 'см')
+                    break
+                else:
+                    print('Тип >> "Произвольная трапеция"')
+                    print('Площадь четырехтреугольника >> ' + str('%.2f' % ((((BC + AD) / 2) * h))) + 'см')
+                    break
 
-        if (round(DAB, 2) == round(ABC, 2) == round(BCD, 2) == round(CDA, 2) == 90.00):
-            if (AB == BC == CD == AD):
-                print('Тип >> "Квадрат"')
-                print('Площадь четырехтреугольника >> ' + str('%.2f' %(AB ** 2)) + 'см')
-            elif ((AB == CD) and (BC == AD)):
-                print('Тип >> "Прямоугольник"')
-                print('Площадь четырехтреугольника >> ' + str('%.2f' %(AB * BC)) + 'см')
-        elif ((AB ** 2 == AO ** 2 + BO ** 2) == (BC ** 2 == CO ** 2 + BO ** 2) == (CD ** 2 == CO ** 2 + DO ** 2) == (
-                AD ** 2 == DO ** 2 + AO ** 2)):
-            if (AB == BC == CD == AD):
-                print('Тип >> "Ромб"')
-                print('Площадь четырехтреугольника >> ' + str('%.2f' %(((AC * BD) / 2))) + 'см')
-            elif (((AB == BC) and (CD == AD)) or ((BC == CD) and (AB == AD))):
-                print('Тип >> "Дельтоид"')
-                print('Площадь четырехтреугольника >> ' + str('%.2f' %(((AC * BD) / 2))) + 'см')
-        elif ((AB == CD) and (BC == AD)) and ((round(DAB, 2) == round(BCD, 2)) and (round(ABC, 2) == round(CDA, 2))) and ((II_AB_CD == True) and (II_BC_AD == True)):
-            print('Тип >> "Параллелограмм"')
-            print('Площадь четырехтреугольника >> ' + str('%.2f' %((math.sin(CDA) * (AB * AD)))) + 'см')
-        elif (II_AB_CD == II_BC_AD == False) and (AB != BC != CD != AD):
-            print('Тип >> "Произвольный четырехугольник"')
-
-        if ((II_BC_AD == True) or (II_AB_CD == True)):
-            if ((AB == CD) or (BC == AD)):
-                print('Тип >> "Равнобедренная трапеция"')
-                print('Площадь четырехтреугольника >> '+str('%.2f' %((((BC+AD)/2)*h)))+ 'см')
-            elif (round(DAB, 2) == round(ABC, 2) == 90.00) or (round(BCD, 2) == round(CDA, 2) == 90.00):
-                print('Тип >> "Прямоугольная трапеция"')
-                print('Площадь четырехтреугольника >> ' + str('%.2f' %((((BC + AD) / 2) * h))) + 'см')
-            else:
-                print('Тип >> "Произвольная трапеция"')
-                print('Площадь четырехтреугольника >> ' + str('%.2f' %((((BC + AD) / 2) * h))) + 'см')
-                
         print()
         print('Периметр четырехугольника >> ' + str('%.2f' %(perimeter(AB, BC, CD, AD))) + 'см')
         print()
@@ -318,4 +329,7 @@ while True:
 
         plt.title('Ваш четырехугольник:')
         plt.show()
-    break
+
+        break
+    else:
+        continue
