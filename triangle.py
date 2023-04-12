@@ -5,8 +5,8 @@ from colorama import init
 from colorama import Fore, Back, Style
 
 
-def perimeter(side1, side2, side3):
-    return float((side1+side2+side3))
+def perimeter(side1, side2, side3,side4):
+    return float((side1+side2+side3+side4))
 
 
 def square(side1, side2, side3):
@@ -233,7 +233,8 @@ while True:
         # COD=square(side1=CO, side2=CD, side3=DO)
         # DOA=square(side1=DO, side2=AO, side3=AD)
 
-        print('информация о четырехугольнике')
+        print('информация о четырехугольнике:')
+        print()
 
         if (round(ABC, 2) + round(DAB, 2) == 180):
             II_AB_CD = True
@@ -245,53 +246,60 @@ while True:
         else:
             II_BC_AD = False
 
+        angle_a = angle(BO, AO, AB)
+        h=side(x2,y2,x2,x1)
 
-        if  (round(DAB, 2) == round(ABC, 2) == round(BCD, 2) == round(CDA, 2) == 90.00):
+        if (round(DAB, 2) == round(ABC, 2) == round(BCD, 2) == round(CDA, 2) == 90.00):
             if (AB == BC == CD == AD):
                 print('Тип >> "Квадрат"')
-
+                print('Площадь четырехтреугольника >> ' + str('%.2f' %(AB ** 2)) + 'см')
             elif ((AB == CD) and (BC == AD)):
                 print('Тип >> "Прямоугольник"')
-
-        elif ((AB**2==AO**2+BO**2)==(BC**2==CO**2+BO**2)==(CD**2==CO**2+DO**2)==(AD**2==DO**2+AO**2)):
-            if  (AB == BC == CD == AD):
+                print('Площадь четырехтреугольника >> ' + str('%.2f' %(AB * BC)) + 'см')
+        elif ((AB ** 2 == AO ** 2 + BO ** 2) == (BC ** 2 == CO ** 2 + BO ** 2) == (CD ** 2 == CO ** 2 + DO ** 2) == (
+                AD ** 2 == DO ** 2 + AO ** 2)):
+            if (AB == BC == CD == AD):
                 print('Тип >> "Ромб"')
-
-            elif (((AB==BC) and (CD==AD)) or ((BC==CD) and (AB==AD))):
+                print('Площадь четырехтреугольника >> ' + str('%.2f' %(((AC * BD) / 2))) + 'см')
+            elif (((AB == BC) and (CD == AD)) or ((BC == CD) and (AB == AD))):
                 print('Тип >> "Дельтоид"')
-
-        elif ((AB == CD) and (BC == AD)) and ((round(DAB, 2) == round(BCD, 2)) and (round(ABC, 2) == round(CDA, 2))) and ((II_AB_CD == True) and (II_BC_AD==True)):
+                print('Площадь четырехтреугольника >> ' + str('%.2f' %(((AC * BD) / 2))) + 'см')
+        elif ((AB == CD) and (BC == AD)) and ((round(DAB, 2) == round(BCD, 2)) and (round(ABC, 2) == round(CDA, 2))) and ((II_AB_CD == True) and (II_BC_AD == True)):
             print('Тип >> "Параллелограмм"')
-
-        elif (II_AB_CD==II_BC_AD==False) and (AB != BC != CD != AD):
+            print('Площадь четырехтреугольника >> ' + str('%.2f' %((math.sin(CDA) * (AB * AD)))) + 'см')
+        elif (II_AB_CD == II_BC_AD == False) and (AB != BC != CD != AD):
             print('Тип >> "Произвольный четырехугольник"')
 
         if ((II_BC_AD == True) or (II_AB_CD == True)):
-            if ((AB==CD) or (BC==AD)):
+            if ((AB == CD) or (BC == AD)):
                 print('Тип >> "Равнобедренная трапеция"')
-
-            elif (round(DAB, 2) == round(ABC, 2)== 90.00) or(round(BCD, 2) == round(CDA, 2) == 90.00):
+                print('Площадь четырехтреугольника >> '+str('%.2f' %((((BC+AD)/2)*h)))+ 'см')
+            elif (round(DAB, 2) == round(ABC, 2) == 90.00) or (round(BCD, 2) == round(CDA, 2) == 90.00):
                 print('Тип >> "Прямоугольная трапеция"')
-
+                print('Площадь четырехтреугольника >> ' + str('%.2f' %((((BC + AD) / 2) * h))) + 'см')
             else:
                 print('Тип >> "Произвольная трапеция"')
-
-
-
-        print(AB)
-        print(BC)
-        print(CD)
-        print(AD)
-
-        print(AO)
-        print(BO)
-        print(CO)
-        print(DO)
-
-        print('∠ABC >> ' + str('%.2f' % ABC) + '°')
-        print('∠BCD >> ' + str('%.2f' % BCD) + '°')
-        print('∠CDA >> ' + str('%.2f' % CDA) + '°')
-        print('∠DAB >> ' + str('%.2f' % DAB) + '°')
+                print('Площадь четырехтреугольника >> ' + str('%.2f' %((((BC + AD) / 2) * h))) + 'см')
+                
+        print()
+        print('Периметр четырехугольника >> ' + str('%.2f' %(perimeter(AB, BC, CD, AD))) + 'см')
+        print()
+        print('Стороны четырехугольника:')
+        print()
+        print('АВ >> ' + str('%.2f' % AB) + 'см')
+        print('BC >> ' + str('%.2f' % BC) + 'см')
+        print('CD >> ' + str('%.2f' % CD) + 'см')
+        print('АD >> ' + str('%.2f' % AD) + 'см')
+        print()
+        print('Диагонали четырехугольника:')
+        print('АC >> ' + str('%.2f' % AC) + 'см')
+        print('BD >> ' + str('%.2f' % BD) + 'см')
+        print()
+        print('Углы четырехугольника:')
+        print('∠ABC >> ' + str('%.2f' % BCD) + '°')
+        print('∠BCD >> ' + str('%.2f' % ABC) + '°')
+        print('∠CDA >> ' + str('%.2f' % DAB) + '°')
+        print('∠DAB >> ' + str('%.2f' % CDA) + '°')
 
         x, y = [x1, x2, x3, x4], [y1, y2, y3, y4]
         x11, y11 = [x1, x4], [y1, y4]
