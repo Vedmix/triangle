@@ -1,26 +1,26 @@
 import matplotlib.pyplot as plt
-import math
-from math import acos, degrees
-from colorama import init
-from colorama import Fore, Back, Style
+from math import acos, degrees, sqrt
+from colorama import Fore, Back, Style, init
 
 
-def perimeter(side1, side2, side3,side4):
+def perimeter_t(side1, side2, side3):
+    return float((side1+side2+side3))
+
+def perimeter_e(side1, side2, side3,side4):
     return float((side1+side2+side3+side4))
 
-
 def square(side1, side2, side3):
-    p = perimeter(side1, side2, side3) / 2
-    return (math.sqrt(p * (p - side1) * (p - side2) * (p - side3)))
+    p = perimeter_t(side1, side2, side3) / 2
+    return (sqrt(p * (p - side1) * (p - side2) * (p - side3)))
 
 
 def side(point_x_1, point_y_1, point_x_2, point_y_2):
-    side = math.sqrt(((point_x_1 - point_x_2) ** 2) + ((point_y_1 - point_y_2) ** 2))
+    side = sqrt(((point_x_1 - point_x_2) ** 2) + ((point_y_1 - point_y_2) ** 2))
     return side
 
 
 def lenght_median(side1, side2, side3):  # side3 вычитаем
-    lenght_median = math.sqrt(2 * side1 ** 2 + 2 * side2 ** 2 - side3 ** 2) / 2
+    lenght_median = sqrt(2 * side1 ** 2 + 2 * side2 ** 2 - side3 ** 2) / 2
     return lenght_median
 
 
@@ -80,17 +80,17 @@ while True:
             print('Такого треугольника не существует!')
             continue
 
-        AB = side(point_x_1=x1, point_y_1=y1, point_x_2=x2, point_y_2=y2)
-        BC = side(point_x_1=x2, point_y_1=y2, point_x_2=x3, point_y_2=y3)
-        AC = side(point_x_1=x1, point_y_1=y1, point_x_2=x3, point_y_2=y3)
+        AB = side(x1, y1, x2, y2)
+        BC = side(x2, y2, x3, y3)
+        AC = side(x1, y1, x3, y3)
 
-        AF = lenght_median(side1=AC, side2=AB, side3=BC)  # math.sqrt(2*AC**2+2*AB**2-BC**2)/2#AC AB BC
-        BD = lenght_median(side1=AC, side2=BC, side3=AB)  # math.sqrt(2*AC**2+2*BC**2-AB**2)/2#AC BC AB
-        CE = lenght_median(side1=AB, side2=BC, side3=AC)  # math.sqrt(2*AB**2+2*BC**2-AC**2)/2#AB BC AC
+        AF = lenght_median(AC, AB, BC)
+        BD = lenght_median(AC, BC, AB)
+        CE = lenght_median(AB, BC, AC)
 
-        angle_BAC = angle(side1=AC, side2=AB, side3=BC)  # degrees(acos((AC**2+AB**2-BC**2)/(2.0 * AB * AC)))
-        angle_ABC = angle(side1=AC, side2=BC, side3=AB)  # degrees(acos((AC**2+BC**2-AB**2)/(2.0 * AC * BC)))
-        angle_BCA = angle(side1=AB, side2=BC, side3=AC)  # degrees(acos((AB**2+BC**2-AC**2)/(2.0 * AB * BC)))
+        angle_BAC = angle(AC, AB, BC)
+        angle_ABC = angle(AC, BC, AB)
+        angle_BCA = angle(AB, BC, AC)
 
         # наименование точек
         fig, ax = plt.subplots()
@@ -113,54 +113,60 @@ while True:
         mid_AB_x, mid_AB_y = ((x1 + x2) / 2), ((y1 + y2) / 2)
         median_C_x, median_C_y = [x3, mid_AB_x], [y3, mid_AB_y]
 
-        print(Fore.GREEN)
+        print()
 
         print('Информация о треугольнике:')
+        print()
         if (AB + BC > AC) and (BC + AC > AB) and (AB + AC > BC):
             if AB == BC == AC:
                 print('Тип >> "Равносторонний треугольник"')
+                print()
             elif (angle_BAC == 90) or (angle_ABC == 90) or (angle_BCA == 90):
                 print('Тип >> "Прямоугольный треугольник"')
+                print()
             elif (angle_BAC < 90) and (angle_ABC < 90) and (angle_BCA < 90):
                 print('Тип >> "Остроугольный треугольник"')
+                print()
             elif (angle_BAC > 90) or (angle_ABC > 90) or (angle_BCA > 90):
                 print('Тип >> "Тупоугольный треугольник"')
+                print()
             elif (AB != BC == AC) or (AB == BC != AC) or (AB == AC != BC):
                 print('Тип >> Равнобедренный треугольник')
-            print('Площадь треугольника >> ' + str('%.2f' % square(side1=AB, side2=BC, side3=AC)) + 'см')
-            print('Периметр треугольника >> ' + str('%.2f' % perimeter(side1=AB, side2=BC, side3=AC)) + 'см')
+            print('Площадь треугольника >> ' + str('%.2f' % square(AB, BC, AC)) + 'см')
+            print()
+            print('Периметр треугольника >> ' + str('%.2f' % perimeter_t(AB, BC, AC)) + 'см')
 
         else:
             print('Такого треугольника не существует!')
             continue
 
-        print(Fore.BLUE)
+        print()
 
         print('Углы треугольника:')
         print('∠BAC >> ' + str('%.2f' % angle_BAC) + '°')
         print('∠ABC >> ' + str('%.2f' % angle_ABC) + '°')
         print('∠BCA >> ' + str('%.2f' % angle_BCA) + '°')
 
-        print(Fore.MAGENTA)
+        print()
 
         print('Стороны треугольника:')
         print('АВ >> ' + str('%.2f' % AB) + 'см')
         print('ВC >> ' + str('%.2f' % BC) + 'см')
         print('АC >> ' + str('%.2f' % AC) + 'см')
 
-        print(Fore.MAGENTA)
+        print()
 
         print('Длины медиан:')
         print('AF >> ' + str('%.2f' % AF) + 'см')
         print('BD >> ' + str('%.2f' % BD) + 'см')
         print('CE >> ' + str('%.2f' % CE) + 'см')
 
-        print(Fore.MAGENTA)
+        print()
 
         print('Уравнения сторон треугольника:')
-        print('AB >> ' + equation_side(point_x_1=x1, point_y_1=y1, point_x_2=x2, point_y_2=y2))
-        print('BC >> ' + equation_side(point_x_1=x2, point_y_1=y2, point_x_2=x3, point_y_2=y3))
-        print('AC >> ' + equation_side(point_x_1=x1, point_y_1=y1, point_x_2=x3, point_y_2=y3))
+        print('AB >> ' + equation_side(x1, y1, x2, y2))
+        print('BC >> ' + equation_side(x2, y2, x3, y3))
+        print('AC >> ' + equation_side(x1, y1, x3, y3))
 
         # print(''+str(r))
         x, y = [x1, x2, x3], [y1, y2, y3]
@@ -198,13 +204,13 @@ while True:
             print('Такого четырехугольника не существует!')
             continue
 
-        AB = side(point_x_1=x1, point_y_1=y1, point_x_2=x2, point_y_2=y2)
-        BC = side(point_x_1=x2, point_y_1=y2, point_x_2=x3, point_y_2=y3)
-        CD = side(point_x_1=x3, point_y_1=y3, point_x_2=x4, point_y_2=y4)
-        AD = side(point_x_1=x1, point_y_1=y1, point_x_2=x4, point_y_2=y4)
+        AB = side(x1, y1, x2, y2)
+        BC = side(x2, y2, x3, y3)
+        CD = side(x3, y3, x4, y4)
+        AD = side(x1, y1, x4, y4)
 
-        AC = side(point_x_1=x2, point_y_1=y2, point_x_2=x4, point_y_2=x4)
-        BD = side(point_x_1=x1, point_y_1=y1, point_x_2=x3, point_y_2=x3)
+        AC = side(x2, y2, x4, x4)
+        BD = side(x1, y1, x3, x3)
 
         AC1 = line_coefficients([x1, y1], [x3, y3])
         BD1 = line_coefficients([x2, y2], [x4, y4])
@@ -212,10 +218,25 @@ while True:
         O_X = intersection_x(AC1, BD1)
         O_Y = intersection_y(AC1, BD1)
 
-        AO = side(point_x_1=x1, point_y_1=y1, point_x_2=O_X, point_y_2=O_Y)
-        BO = side(point_x_1=x2, point_y_1=y2, point_x_2=O_X, point_y_2=O_Y)
-        CO = side(point_x_1=x3, point_y_1=y3, point_x_2=O_X, point_y_2=O_Y)
-        DO = side(point_x_1=x3, point_y_1=y3, point_x_2=O_X, point_y_2=O_Y)
+        # Середины сторон
+        E=[((x1+x2)/2),((y1+y2)/2)]
+        G=[((x2+x3)/2),((y2+y3)/2)]
+        F=[((x3+x4)/2),((x3+y4)/2)]
+        H=[((x1+x4)/2),((y1+y4)/2)]
+
+        # Средние линии
+        EF = line_coefficients([E[0], E[1]], [F[0], F[1]])
+        GH = line_coefficients([G[0], G[1]], [H[0], H[1]])
+        
+        # Точка пересечения средних линий
+        Z_X = intersection_x(EF,GH)
+        Z_Y = intersection_y(EF, GH)
+
+
+        AO = side(x1, y1, O_X, O_Y)
+        BO = side(x2, y2, O_X, O_Y)
+        CO = side(x3, y3, O_X, O_Y)
+        DO = side(x3, y3, O_X, O_Y)
 
         A = [x1, y1]
         B = [x2, y2]
@@ -227,10 +248,10 @@ while True:
         CD1 = [D[0] - C[0], D[1] - C[1]]
         DA1 = [A[0] - D[0], A[1] - D[1]]
 
-        ABC = degrees(acos((AB1[0] * BC1[0] + AB1[1] * BC1[1]) / (math.sqrt(AB1[0] ** 2 + AB1[1] ** 2) * math.sqrt(BC1[0] ** 2 + BC1[1] ** 2))))
-        BCD = degrees(acos((BC1[0] * CD1[0] + BC1[1] * CD1[1]) / (math.sqrt(BC1[0] ** 2 + BC1[1] ** 2) * math.sqrt(CD1[0] ** 2 + CD1[1] ** 2))))
-        CDA = degrees(acos((CD1[0] * DA1[0] + CD1[1] * DA1[1]) / (math.sqrt(CD1[0] ** 2 + CD1[1] ** 2) * math.sqrt(DA1[0] ** 2 + DA1[1] ** 2))))
-        DAB = degrees(acos((DA1[0] * AB1[0] + DA1[1] * AB1[1]) / (math.sqrt(DA1[0] ** 2 + DA1[1] ** 2) * math.sqrt(AB1[0] ** 2 + AB1[1] ** 2))))
+        ABC = degrees(acos((AB1[0] * BC1[0] + AB1[1] * BC1[1]) / (sqrt(AB1[0] ** 2 + AB1[1] ** 2) * sqrt(BC1[0] ** 2 + BC1[1] ** 2))))
+        BCD = degrees(acos((BC1[0] * CD1[0] + BC1[1] * CD1[1]) / (sqrt(BC1[0] ** 2 + BC1[1] ** 2) * sqrt(CD1[0] ** 2 + CD1[1] ** 2))))
+        CDA = degrees(acos((CD1[0] * DA1[0] + CD1[1] * DA1[1]) / (sqrt(CD1[0] ** 2 + CD1[1] ** 2) * sqrt(DA1[0] ** 2 + DA1[1] ** 2))))
+        DAB = degrees(acos((DA1[0] * AB1[0] + DA1[1] * AB1[1]) / (sqrt(DA1[0] ** 2 + DA1[1] ** 2) * sqrt(AB1[0] ** 2 + AB1[1] ** 2))))
 
         # BOA=square(side1=AB, side2=BO, side3=AO)
         # BCO=square(side1=BO, side2=BC, side3=CO)
@@ -252,27 +273,33 @@ while True:
 
         angle_a = angle(BO, AO, AB)
         h=side(x2,y2,x2,x1)
+
         while True:
             if (round(DAB, 2) == round(ABC, 2) == round(BCD, 2) == round(CDA, 2) == 90.00):
                 if (AB == BC == CD == AD):
                     print('Тип >> "Квадрат"')
+                    print()
                     print('Площадь четырехтреугольника >> ' + str('%.2f' % (AB ** 2)) + 'см')
                     break
                 elif ((AB == CD) and (BC == AD)):
                     print('Тип >> "Прямоугольник"')
+                    print()
                     print('Площадь четырехтреугольника >> ' + str('%.2f' % (AB * BC)) + 'см')
                     break
             elif ((AB ** 2 == AO ** 2 + BO ** 2) == (BC ** 2 == CO ** 2 + BO ** 2) == (CD ** 2 == CO ** 2 + DO ** 2) == (AD ** 2 == DO ** 2 + AO ** 2)):
                 if (AB == BC == CD == AD):
                     print('Тип >> "Ромб"')
+                    print()
                     print('Площадь четырехтреугольника >> ' + str('%.2f' % (((AC * BD) / 2))) + 'см')
                     break
                 elif (((AB == BC) and (CD == AD)) or ((BC == CD) and (AB == AD))):
                     print('Тип >> "Дельтоид"')
+                    print()
                     print('Площадь четырехтреугольника >> ' + str('%.2f' % (((AC * BD) / 2))) + 'см')
                     break
             elif ((AB == CD) and (BC == AD)) and ((round(DAB, 2) == round(BCD, 2)) and (round(ABC, 2) == round(CDA, 2))) and ((II_AB_CD == True) and (II_BC_AD == True)):
                 print('Тип >> "Параллелограмм"')
+                print()
                 print('Площадь четырехтреугольника >> ' + str('%.2f' % ((math.sin(CDA) * (AB * AD)))) + 'см')
                 break
             elif (II_AB_CD == II_BC_AD == False) and (AB != BC != CD != AD):
@@ -281,36 +308,53 @@ while True:
             if ((II_BC_AD == True) or (II_AB_CD == True)):
                 if ((AB == CD) or (BC == AD)):
                     print('Тип >> "Равнобедренная трапеция"')
+                    print()
                     print('Площадь четырехтреугольника >> ' + str('%.2f' % ((((BC + AD) / 2) * h))) + 'см')
                     break
                 elif (round(DAB, 2) == round(ABC, 2) == 90.00) or (round(BCD, 2) == round(CDA, 2) == 90.00):
                     print('Тип >> "Прямоугольная трапеция"')
+                    print()
                     print('Площадь четырехтреугольника >> ' + str('%.2f' % ((((BC + AD) / 2) * h))) + 'см')
                     break
                 else:
                     print('Тип >> "Произвольная трапеция"')
+                    print()
                     print('Площадь четырехтреугольника >> ' + str('%.2f' % ((((BC + AD) / 2) * h))) + 'см')
                     break
 
         print()
-        print('Периметр четырехугольника >> ' + str('%.2f' %(perimeter(AB, BC, CD, AD))) + 'см')
+
+        print('Периметр четырехугольника >> ' + str('%.2f' %(perimeter_e(AB, BC, CD, AD))) + 'см')
+
         print()
+
         print('Стороны четырехугольника:')
-        print()
         print('АВ >> ' + str('%.2f' % AB) + 'см')
         print('BC >> ' + str('%.2f' % BC) + 'см')
         print('CD >> ' + str('%.2f' % CD) + 'см')
         print('АD >> ' + str('%.2f' % AD) + 'см')
+
         print()
+
         print('Диагонали четырехугольника:')
         print('АC >> ' + str('%.2f' % AC) + 'см')
         print('BD >> ' + str('%.2f' % BD) + 'см')
+
         print()
+
         print('Углы четырехугольника:')
         print('∠ABC >> ' + str('%.2f' % BCD) + '°')
         print('∠BCD >> ' + str('%.2f' % ABC) + '°')
         print('∠CDA >> ' + str('%.2f' % DAB) + '°')
         print('∠DAB >> ' + str('%.2f' % CDA) + '°')
+
+        print()
+
+        print('Уравнения сторон четырехугольника')
+        print('AB >> '+equation_side(x1,y1,x2,y2))
+        print('BC >> '+equation_side(x2,y2,x3,y3))
+        print('CD >> '+equation_side(x3,y3,x4,y4))
+        print('AD >> '+equation_side(x1,y1,x4,y4))
 
         x, y = [x1, x2, x3, x4], [y1, y2, y3, y4]
         x11, y11 = [x1, x4], [y1, y4]
