@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 from math import acos, degrees, sqrt, sin
 from colorama import Fore, Back, Style, init
+from functions_triangle import side
 
 
 def perimeter_t(side1, side2, side3):
@@ -12,12 +13,6 @@ def perimeter_e(side1, side2, side3,side4):
 def square(side1, side2, side3):
     p = perimeter_t(side1, side2, side3) / 2
     return (sqrt(p * (p - side1) * (p - side2) * (p - side3)))
-
-
-def side(point_x_1, point_y_1, point_x_2, point_y_2):
-    side = sqrt(((point_x_1 - point_x_2) ** 2) + ((point_y_1 - point_y_2) ** 2))
-    return side
-
 
 def lenght_median(side1, side2, side3):  # side3 вычитаем
     lenght_median = sqrt(2 * side1 ** 2 + 2 * side2 ** 2 - side3 ** 2) / 2
@@ -143,9 +138,9 @@ while True:
         print()
 
         print('Углы треугольника:')
-        print('∠BAC >> ' + str('%.2f' % angle_BAC) + '°')
-        print('∠ABC >> ' + str('%.2f' % angle_ABC) + '°')
-        print('∠BCA >> ' + str('%.2f' % angle_BCA) + '°')
+        print('∠BAC >> ' + str('%.2f' % degrees(angle_BAC)) + '°')
+        print('∠ABC >> ' + str('%.2f' % degrees(angle_ABC)) + '°')
+        print('∠BCA >> ' + str('%.2f' % degrees(angle_BCA)) + '°')
 
         print()
 
