@@ -25,7 +25,7 @@ def lenght_median(side1, side2, side3):  # side3 вычитаем
 
 
 def angle(side1, side2, side3):  # side3 вычитаем
-    angle = degrees(acos((side1 ** 2 + side2 ** 2 - side3 ** 2) / (2.0 * side1 * side2)))
+    angle = (acos((side1 ** 2 + side2 ** 2 - side3 ** 2) / (2.0 * side1 * side2)))
     return angle
 
 
@@ -252,11 +252,6 @@ while True:
         CDA = degrees(acos((CD1[0] * DA1[0] + CD1[1] * DA1[1]) / (sqrt(CD1[0] ** 2 + CD1[1] ** 2) * sqrt(DA1[0] ** 2 + DA1[1] ** 2))))
         DAB = degrees(acos((DA1[0] * AB1[0] + DA1[1] * AB1[1]) / (sqrt(DA1[0] ** 2 + DA1[1] ** 2) * sqrt(AB1[0] ** 2 + AB1[1] ** 2))))
 
-        # BOA=square(side1=AB, side2=BO, side3=AO)
-        # BCO=square(side1=BO, side2=BC, side3=CO)
-        # COD=square(side1=CO, side2=CD, side3=DO)
-        # DOA=square(side1=DO, side2=AO, side3=AD)
-
         print('Информация о четырехугольнике:')
         print()
 
@@ -270,7 +265,7 @@ while True:
         else:
             II_BC_AD = False
 
-
+        angle_a=angle(AO,DO,AD)
         h=side(x2,y2,x2,y1)
 
         while True:
@@ -280,15 +275,6 @@ while True:
                     print('Тип >> "Квадрат"')
                     print()
                     print('Площадь четырехтреугольника >> ' + str('%.2f' % (AB ** 2)) + 'см')
-
-                    r = h / 2
-                    circle1 = plt.Circle((O_X, O_Y), r, color='r', fill=None)
-                    fig, ax = plt.subplots()
-                    ax.set_aspect('equal', adjustable='box')
-                    ax.add_artist(circle1)
-
-                    print()
-                    print('Радиус >>'+str(r)+'см')
 
                     break
 
@@ -307,15 +293,6 @@ while True:
                     print()
                     print('Площадь четырехтреугольника >> ' + str('%.2f' % (((AC * BD) / 2))) + 'см')
 
-                    r = h/2
-                    circle1 = plt.Circle((O_X, O_Y), r, color='r', fill=None)
-                    fig, ax = plt.subplots()
-                    ax.set_aspect('equal', adjustable='box')
-                    ax.add_artist(circle1)
-
-                    print()
-                    print('Радиус >>'+str(r)+'см')
-
                     break
 
                 elif (((AB == BC) and (CD == AD)) or ((BC == CD) and (AB == AD))):
@@ -332,45 +309,22 @@ while True:
                 print()
                 print('Площадь четырехтреугольника >> ' + str('%.2f' % ((sin(CDA) * (AB * AD)))) + 'см')
 
-                if ((AB + CD) == (BC + AD)):
-                    r = AC / 2
-                    circle1 = plt.Circle((O_X,O_Y), r, color='r', fill=None)
-                    fig, ax = plt.subplots()
-                    ax.set_aspect('equal', adjustable='box')
-                    ax.add_artist(circle1)
-
-                    print()
-                    print('Радиус >>' + str(r) + 'см')
-                else:
-                    print()
-                    print('В данный четырехугольник нельзя  вписать окружность')
-
                 break
 
-            else:
+            if (AB!=BC!=CD!=AD):
 
                 print('Тип >> "Произвольный четырехугольник"')
+                print()
+                print('Площадь четырехтреугольника >> ' + str('%.2f' % ((AC*BD*sin(angle_a))/2)) + 'см')
 
                 break
 
             if ((II_BC_AD == True) or (II_AB_CD == True)):
+
                 if ((AB == CD) or (BC == AD)):
                     print('Тип >> "Равнобедренная трапеция"')
                     print()
                     print('Площадь четырехтреугольника >> ' + str('%.2f' % ((((BC + AD) / 2) * h))) + 'см')
-
-                    if ((AB + CD) == (BC + AD)):
-                        r = h / 2
-                        circle1 = plt.Circle((Z_X, Z_Y), r, color='b', fill=False)
-                        fig, ax = plt.subplots()
-                        ax.set_aspect('equal', adjustable='box')
-                        ax.add_artist(circle1)
-
-                        print()
-                        print('Радиус >>' + str(r) + 'см')
-                    else:
-                        print()
-                        print('В данный четырехугольник нельзя вписать окружность')
 
                     break
 
@@ -379,20 +333,6 @@ while True:
                     print()
                     print('Площадь четырехтреугольника >> ' + str('%.2f' % ((((BC + AD) / 2) * h))) + 'см')
 
-                    if ((AB + CD) == (BC + AD)):
-                        r = h / 2
-                        circle1 = plt.Circle((Z_X, Z_Y), r, color='b', fill=False)
-                        fig, ax = plt.subplots()
-                        ax.set_aspect('equal', adjustable='box')
-                        ax.add_artist(circle1)
-
-                        print()
-                        print('Радиус >>' + str(r) + 'см')
-                    else:
-                        print()
-                        print('В данный четырехугольник нельзя вписать окружность')
-
-
                     break
 
                 else:
@@ -400,45 +340,8 @@ while True:
                     print()
                     print('Площадь четырехтреугольника >> ' + str('%.2f' % ((((BC + AD) / 2) * h))) + 'см')
 
-                    if ((AB + CD) == (BC + AD)):
-                        r = h / 2
-                        circle1 = plt.Circle((Z_X, Z_Y), r, color='b', fill=False)
-                        fig, ax = plt.subplots()
-                        ax.set_aspect('equal', adjustable='box')
-                        ax.add_artist(circle1)
-
-                        print()
-                        print('Радиус >>' + str(r) + 'см')
-                    else:
-                        print()
-                        print('В данный четырехугольник нельзя вписать окружность')
-
                     break
-
-        # if ((AB + CD) == (BC + AD)):
-        #     if t==0:
-        #         print('В данный четырехугольник нельзя  вписать окружность')
-        #     elif t==1:
-        #         r=AC/2
-        #         circle1 = plt.Circle((O_X,O_Y), r, color='r', fill=None)
-        #         fig, ax = plt.subplots()
-        #         ax.set_aspect('equal', adjustable='box')
-        #         ax.add_artist(circle1)
-        #     else:
-        #         r=h/2
-        #         circle1 = plt.Circle((Z_X,Z_Y), r, color='b', fill=False)
-        #         fig, ax = plt.subplots()
-        #         ax.set_aspect('equal', adjustable='box')
-        #         ax.add_artist(circle1)
-        else:
-            print('В данный четырехугольник нельзя  вписать окружность')
-
-
-
-
-
-
-
+        print(angle_a)
         print()
 
         print('Периметр четырехугольника >> ' + str('%.2f' %(perimeter_e(AB, BC, CD, AD))) + 'см')
