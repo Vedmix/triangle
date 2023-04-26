@@ -66,13 +66,13 @@ while True:
             if AB == BC == AC:
                 print('Тип >> "Равносторонний треугольник"')
                 print()
-            elif (angle_BAC == 90) or (angle_ABC == 90) or (angle_BCA == 90):
+            elif (round(angle_BAC, 15) == round((pi / 2), 15)) or (round(angle_ABC, 15) == round((pi / 2), 15)) or (round(angle_BCA, 15) == round((pi / 2), 15)):
                 print('Тип >> "Прямоугольный треугольник"')
                 print()
-            elif (angle_BAC < 90) and (angle_ABC < 90) and (angle_BCA < 90):
+            elif (round(angle_BAC, 15) < round((pi / 2), 15)) and (round(angle_ABC, 15) < round((pi / 2), 15)) and (round(angle_BCA, 15) < round((pi / 2), 15)):
                 print('Тип >> "Остроугольный треугольник"')
                 print()
-            elif (angle_BAC > 90) or (angle_ABC > 90) or (angle_BCA > 90):
+            elif (round(angle_BAC, 15) > round((pi / 2), 15)) or (round(angle_ABC, 15) > round((pi / 2), 15)) or (round(angle_BCA, 15) > round((pi / 2), 15)):
                 print('Тип >> "Тупоугольный треугольник"')
                 print()
             elif (AB != BC == AC) or (AB == BC != AC) or (AB == AC != BC):
