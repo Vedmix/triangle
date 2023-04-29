@@ -106,9 +106,9 @@ while True:
     print()
 
     print('Уравнения сторон треугольника:')
-    print('AB >> ' + equation_side(x1, y1, x2, y2))
-    print('BC >> ' + equation_side(x2, y2, x3, y3))
-    print('AC >> ' + equation_side(x1, y1, x3, y3))
+    print('AB >> ' + equationYKB(x1, y1, x2, y2))
+    print('BC >> ' + equationYKB(x2, y2, x3, y3))
+    print('AC >> ' + equationYKB(x1, y1, x3, y3))
 
     # print(''+str(r))
     x, y = [x1, x2, x3], [y1, y2, y3]

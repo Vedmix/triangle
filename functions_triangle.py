@@ -18,13 +18,23 @@ def lenght_median(side1, side2, side3):  # side3 вычитаем
     lenght_median = sqrt(2 * side1 ** 2 + 2 * side2 ** 2 - side3 ** 2) / 2
     return lenght_median
 
-
 def angle(side1, side2, side3):  # side3 вычитаем
     angle = (acos((side1 ** 2 + side2 ** 2 - side3 ** 2) / (2.0 * side1 * side2)))
     return angle
 
+def equationYKB(x1, y1, x2, y2):
+    if x2 == x1:
+        return f"x = {'%.2F' %x1}"
+    if y2 == y1:
+        return f"y = {'%.2F' %y1}"
+    k = (y2 - y1) / (x2 - x1)
+    b = y1 - k * x1
+    if b<0:
+        return f"y = {'%.2F' %k}x + ({'%.2F' %b})"
+    else:
+        return f"y = {'%.2F' %k}x + {'%.2F' %b}"
 
-def equation_side(point_x_1, point_y_1, point_x_2, point_y_2):
+def equationABC(point_x_1, point_y_1, point_x_2, point_y_2):
     A = float(point_y_2 - point_y_1)
     B = float(point_x_1 - point_x_2)
     C = float(point_x_2 * point_y_1 - point_x_1 * point_y_2)
