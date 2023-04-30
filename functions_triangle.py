@@ -40,6 +40,14 @@ def equationABC(point_x_1, point_y_1, point_x_2, point_y_2):
     C = float(point_x_2 * point_y_1 - point_x_1 * point_y_2)
     return '(' + str(A) + ')' + 'x + ' + '(' + str(B) + ')' + 'y + ' + '(' + str(C) + ')' + ' = 0'
 
+def equationH(point_x_1, point_y_1, point_x_2, point_y_2,x1,y1):
+    A = float(point_y_2 - point_y_1)
+    B = float(point_x_1 - point_x_2)
+    C = float(point_x_2 * point_y_1 - point_x_1 * point_y_2)
+    a=-B
+    b=A
+    c=b*x1-a*y1
+    return '(' + str(a) + ')' + 'x + ' + '(' + str(b) + ')' + 'y + ' + '(' + str(c) + ')' + ' = 0'
 
 def line_coefficients(p1, p2):
     A = (p1[1] - p2[1])

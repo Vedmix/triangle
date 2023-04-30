@@ -55,10 +55,15 @@ while True:
     mid_AB_x, mid_AB_y = ((x1 + x2) / 2), ((y1 + y2) / 2)
     median_C_x, median_C_y = [x3, mid_AB_x], [y3, mid_AB_y]
 
+
+    h = (2 / AC) * (sqrt(perimeter_t(AB, AC, BC) / 2 * (perimeter_t(AB, AC, BC) / 2 - AB) * (perimeter_t(AB, AC, BC) / 2 - BC) * (perimeter_t(AB, AC, BC) / 2 - AC)))
+
     print()
 
     print('Информация о треугольнике:')
+
     print()
+
     if (AB + BC > AC) and (BC + AC > AB) and (AB + AC > BC):
         if AB == BC == AC:
             print('Тип >> "Равносторонний треугольник"')
@@ -74,9 +79,9 @@ while True:
             print()
         elif (AB != BC == AC) or (AB == BC != AC) or (AB == AC != BC):
             print('Тип >> Равнобедренный треугольник')
-        print('Площадь треугольника >> ' + str('%.2f' % square(AB, BC, AC)) + 'см')
+        print(f'Площадь треугольника >> {"%.2f " %square(AB, BC, AC)}')
         print()
-        print('Периметр треугольника >> ' + str('%.2f' % perimeter_t(AB, BC, AC)) + 'см')
+        print(f'Периметр треугольника >> {"%.2f" % perimeter_t(AB, BC, AC)}')
 
     else:
         print('Такого треугольника не существует!')
@@ -85,30 +90,35 @@ while True:
     print()
 
     print('Углы треугольника:')
-    print('∠BAC >> ' + str('%.2f' % degrees(angle_BAC)) + '°')
-    print('∠ABC >> ' + str('%.2f' % degrees(angle_ABC)) + '°')
-    print('∠BCA >> ' + str('%.2f' % degrees(angle_BCA)) + '°')
+    print(f'∠BAC >> {"%.2f" % degrees(angle_BAC)}°')
+    print(f'∠ABC >> {"%.2f" % degrees(angle_ABC)}°')
+    print(f'∠BCA >> {"%.2f" % degrees(angle_BCA)}°')
 
     print()
 
     print('Стороны треугольника:')
-    print('АВ >> ' + str('%.2f' % AB) + 'см')
-    print('ВC >> ' + str('%.2f' % BC) + 'см')
-    print('АC >> ' + str('%.2f' % AC) + 'см')
-
+    print(f'АВ >> {"%.2f" % AB}')
+    print(f'ВC >> {"%.2f" % BC}')
+    print(f'АC >> {"%.2f" % AC}')
     print()
 
     print('Длины медиан:')
-    print('AF >> ' + str('%.2f' % AF) + 'см')
-    print('BD >> ' + str('%.2f' % BD) + 'см')
-    print('CE >> ' + str('%.2f' % CE) + 'см')
+    print(f'AF >> {"%.2f" % AF}')
+    print(f'BD >> {"%.2f" % BD}')
+    print(f'CE >> {"%.2f" % CE}')
 
     print()
 
+    print('Уравнение высоты:')
+    print(f'BH >> {equationH(x1,y1,x3,y3,x2,y2)}')
+    print('Длина высоты:')
+    print(f'BH >> {"%.2f" %h}')
+    print()
+
     print('Уравнения сторон треугольника:')
-    print('AB >> ' + equationYKB(x1, y1, x2, y2))
-    print('BC >> ' + equationYKB(x2, y2, x3, y3))
-    print('AC >> ' + equationYKB(x1, y1, x3, y3))
+    print(f'AB >> {equationYKB(x1, y1, x2, y2)}')
+    print(f'BC >> {equationYKB(x2, y2, x3, y3)}')
+    print(f'AC >> {equationYKB(x1, y1, x3, y3)}')
 
     # print(''+str(r))
     x, y = [x1, x2, x3], [y1, y2, y3]
