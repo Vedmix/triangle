@@ -11,12 +11,9 @@ while True:
 
     print('Введите координаты точек: ')
 
-    x1, y1 = input('Точка А => ').split(';')
-    x2, y2 = input('Точка B => ').split(';')
-    x3, y3 = input('Точка C => ').split(';')
-
-    x1, x2, x3 = float(x1), float(x2), float(x3)
-    y1, y2, y3 = float(y1), float(y2), float(y3)
+    x1, y1 = list(map(float,input('Точка А => ').split(';')))
+    x2, y2 = list(map(float,input('Точка B => ').split(';')))
+    x3, y3 = list(map(float,input('Точка C => ').split(';')))
 
     if (x1 == x2 == x3) or (y1 == y2 == y3):
         print('Такого треугольника не существует!')
