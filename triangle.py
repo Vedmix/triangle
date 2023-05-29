@@ -52,9 +52,6 @@ while True:
     mid_AB_x, mid_AB_y = ((x1 + x2) / 2), ((y1 + y2) / 2)
     median_C_x, median_C_y = [x3, mid_AB_x], [y3, mid_AB_y]
 
-
-    h = (2 / AC) * (sqrt(perimeter_t(AB, AC, BC) / 2 * (perimeter_t(AB, AC, BC) / 2 - AB) * (perimeter_t(AB, AC, BC) / 2 - BC) * (perimeter_t(AB, AC, BC) / 2 - AC)))
-
     print()
 
     print('Информация о треугольнике:')
@@ -62,27 +59,80 @@ while True:
     print()
 
     if (AB + BC > AC) and (BC + AC > AB) and (AB + AC > BC):
+
         if AB == BC == AC:
-            print('Тип >> "Равносторонний треугольник"')
+
+            print('Тип >> "Равносторонний треугольник"'); type=1
             print()
+
         elif (round(angle_BAC, 15) == round((pi / 2), 15)) or (round(angle_ABC, 15) == round((pi / 2), 15)) or (round(angle_BCA, 15) == round((pi / 2), 15)):
-            print('Тип >> "Прямоугольный треугольник"')
-            print()
+
+            if (AB != BC == AC) or (AB == BC != AC) or (AB == AC != BC):
+
+                print('Тип >> "Прямоугольный треугольник" с равнобедренными боковыми сторонами'); type = 2
+                print()
+
+            else:
+
+                print('Тип >> "Прямоугольный треугольник"'); type = 2
+                print()
+
         elif (round(angle_BAC, 15) < round((pi / 2), 15)) and (round(angle_ABC, 15) < round((pi / 2), 15)) and (round(angle_BCA, 15) < round((pi / 2), 15)):
-            print('Тип >> "Остроугольный треугольник"')
-            print()
+
+            if (AB != BC == AC) or (AB == BC != AC) or (AB == AC != BC):
+
+                print('Тип >> "Остроугольный треугольник" с равнобедренными боковыми сторонами'); type=3
+                print()
+
+            else:
+
+                print('Тип >> "Остроугольный треугольник"'); type = 3
+                print()
+
         elif (round(angle_BAC, 15) > round((pi / 2), 15)) or (round(angle_ABC, 15) > round((pi / 2), 15)) or (round(angle_BCA, 15) > round((pi / 2), 15)):
-            print('Тип >> "Тупоугольный треугольник"')
-            print()
-        elif (AB != BC == AC) or (AB == BC != AC) or (AB == AC != BC):
-            print('Тип >> Равнобедренный треугольник')
+
+            if (AB != BC == AC) or (AB == BC != AC) or (AB == AC != BC):
+
+                print('Тип >> "Тупоугольный треугольник" с равнобедренными боковыми сторонами'); type=4
+                print()
+
+            else:
+
+                print('Тип >> "Тупоугольный треугольник"'); type = 4
+                print()
+
         print(f'Площадь треугольника >> {"%.2f " %square(AB, BC, AC)}')
         print()
         print(f'Периметр треугольника >> {"%.2f" % perimeter_t(AB, BC, AC)}')
 
     else:
+
         print('Такого треугольника не существует!')
         continue
+
+    match type:
+        case 1:
+            print('1')
+        case 2:
+            if (x1==x2) and (y1!=y2):
+                xh,yh=[x1,x2],[y1,y2]
+                if (y1 == y3):
+                    a=side(x1,y1,x3,y3)
+                if (y2 == y3):
+                    a=side(x2,y2,x3,y3)
+            elif (x2 == x3) and (y2 != y3):
+                xh,yh=[x2,x3],[y2,y3]
+                if (y1 == y3):
+                    side(x1,y1,x3,y3)
+                if (y1 == y2):
+                    side(x1,y1,x2,y2)
+            h=((2*square(AB, BC, AC))/a)
+        case 3:
+            print('3')
+        case 4:
+            print('4')
+        case 5:
+            print('5')
 
     print()
 
@@ -109,7 +159,7 @@ while True:
     print('Уравнение высоты:')
     print(f'BH >> {equationH(x1,y1,x3,y3,x2,y2)}')
     print('Длина высоты:')
-    print(f'BH >> {"%.2f" %h}')
+    print(f'h >> {"%.2f" %h}')
     print()
 
     print('Уравнения сторон треугольника:')
@@ -123,7 +173,9 @@ while True:
 
     plt.plot(x, y, color='black')
     plt.plot(x1, y1, color='black')
+    plt.plot(xh, yh, color='red')
     plt.plot(x, y, 'o')
+    plt.plot(xh, yh, 'o')
     plt.plot(x1, y1, 'o')
 
     plt.plot(median_A_x, median_A_y, color='blue')
@@ -138,4 +190,3 @@ while True:
     ax.grid()
     plt.title('Ваш треугольник:')
     plt.show()
-
