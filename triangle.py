@@ -112,7 +112,9 @@ while True:
 
     match type:
         case 1:
-            print('1')
+            xh,yh=[x2,(x1+x3)/2],[y2,(y1+y3)/2]
+            a = side(x1, y1, x3, y3)
+            h = ((2 * square(AB, BC, AC)) / a)
         case 2:
             if (x1==x2) and (y1!=y2):
                 xh,yh=[x1,x2],[y1,y2]
@@ -123,16 +125,44 @@ while True:
             elif (x2 == x3) and (y2 != y3):
                 xh,yh=[x2,x3],[y2,y3]
                 if (y1 == y3):
-                    side(x1,y1,x3,y3)
+                    a=side(x1,y1,x3,y3)
                 if (y1 == y2):
-                    side(x1,y1,x2,y2)
-            h=((2*square(AB, BC, AC))/a)
+                    a=side(x1,y1,x2,y2)
+            else:
+                xh, yh = [x2, x2], [y2, y1]
+                a = side(x1, y1, x3, y3)
+                h = ((2 * square(AB, BC, AC)) / a)
+            h = ((2 * square(AB, BC, AC)) / a)
         case 3:
-            print('3')
+            if y1==y3:
+                xh, yh = [x2, x2], [y2, y1]
+                a = side(x1, y1, x3, y3)
+                h = ((2 * square(AB, BC, AC)) / a)
+            elif y2==y3:
+                xh, yh = [x1, x1], [y1, y2]
+                a = side(x2, y2, x3, y3)
+                h = ((2 * square(AB, BC, AC)) / a)
+            elif y1==y2:
+                xh, yh = [x3, x3], [y3, y2]
+                a = side(x2, y2, x1, y1)
+                h = ((2 * square(AB, BC, AC)) / a)
+            else:
+                h = 0
         case 4:
-            print('4')
-        case 5:
-            print('5')
+            if y1 == y3:
+                xh, yh = [x2, x2], [y2, y1]
+                a = side(x1, y1, x3, y3)
+                h = ((2 * square(AB, BC, AC)) / a)
+            elif y2==y3:
+                xh, yh = [x1, x1], [y1, y2]
+                a = side(x2, y2, x3, y3)
+                h = ((2 * square(AB, BC, AC)) / a)
+            elif y1==y2:
+                xh, yh = [x3, x3], [y3, y2]
+                a = side(x2, y2, x1, y1)
+                h = ((2 * square(AB, BC, AC)) / a)
+            else:
+                h=0
 
     print()
 
@@ -147,6 +177,7 @@ while True:
     print(f'АВ >> {"%.2f" % AB}')
     print(f'ВC >> {"%.2f" % BC}')
     print(f'АC >> {"%.2f" % AC}')
+    
     print()
 
     print('Длины медиан:')
@@ -156,10 +187,9 @@ while True:
 
     print()
 
-    print('Уравнение высоты:')
-    print(f'BH >> {equationH(x1,y1,x3,y3,x2,y2)}')
     print('Длина высоты:')
     print(f'h >> {"%.2f" %h}')
+
     print()
 
     print('Уравнения сторон треугольника:')
@@ -173,9 +203,8 @@ while True:
 
     plt.plot(x, y, color='black')
     plt.plot(x1, y1, color='black')
-    plt.plot(xh, yh, color='red')
+
     plt.plot(x, y, 'o')
-    plt.plot(xh, yh, 'o')
     plt.plot(x1, y1, 'o')
 
     plt.plot(median_A_x, median_A_y, color='blue')
@@ -186,6 +215,9 @@ while True:
 
     plt.plot(median_C_x, median_C_y, color='blue')
     plt.plot(median_C_x, median_C_y, 'o')
+
+    plt.plot(xh, yh, color='red')
+    plt.plot(xh, yh, 'o')
 
     ax.grid()
     plt.title('Ваш треугольник:')
