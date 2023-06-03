@@ -201,24 +201,25 @@ while True:
     x, y = [x1, x2, x3], [y1, y2, y3]
     x1, y1 = [x1, x3], [y1, y3]
 
-    plt.plot(x, y, color='black')
-    plt.plot(x1, y1, color='black')
+    plt.plot(x, y, color='black', label='сторона')
+    plt.plot(x1, y1, color='black', label='сторона')
 
     plt.plot(x, y, 'o')
     plt.plot(x1, y1, 'o')
 
-    plt.plot(median_A_x, median_A_y, color='blue')
+    plt.plot(median_A_x, median_A_y, color='blue', label='медиана')
     plt.plot(median_A_x, median_A_y, 'o')
 
-    plt.plot(median_B_x, median_B_y, color='blue')
+    plt.plot(median_B_x, median_B_y, color='blue', label='медиана')
     plt.plot(median_B_x, median_B_y, 'o')
 
-    plt.plot(median_C_x, median_C_y, color='blue')
+    plt.plot(median_C_x, median_C_y, color='blue', label='медиана')
     plt.plot(median_C_x, median_C_y, 'o')
 
-    plt.plot(xh, yh, color='red')
+    plt.plot(xh, yh, color='red', label='высота')
     plt.plot(xh, yh, 'o')
 
     ax.grid()
     plt.title('Ваш треугольник:')
+    plt.legend()
     plt.show()
