@@ -112,37 +112,36 @@ while True:
 
     match type:
         case 1:
-            xh,yh=[x2,(x1+x3)/2],[y2,(y1+y3)/2]
+            xh,yh = [x2, (x1+x3)/2], [y2, (y1+y3)/2]
             a = side(x1, y1, x3, y3)
             h = ((2 * square(AB, BC, AC)) / a)
         case 2:
-            if (x1==x2) and (y1!=y2):
-                xh,yh=[x1,x2],[y1,y2]
+            if (x1 == x2) and (y1 != y2):
+                xh,yh = [x1, x2], [y1, y2]
                 if (y1 == y3):
-                    a=side(x1,y1,x3,y3)
+                    a = side(x1, y1, x3, y3)
                 if (y2 == y3):
-                    a=side(x2,y2,x3,y3)
+                    a = side(x2, y2, x3, y3)
             elif (x2 == x3) and (y2 != y3):
-                xh,yh=[x2,x3],[y2,y3]
+                xh,yh = [x2, x3],[y2, y3]
                 if (y1 == y3):
-                    a=side(x1,y1,x3,y3)
+                    a = side(x1, y1, x3, y3)
                 if (y1 == y2):
-                    a=side(x1,y1,x2,y2)
+                    a = side(x1, y1, x2, y2)
             else:
                 xh, yh = [x2, x2], [y2, y1]
                 a = side(x1, y1, x3, y3)
-                h = ((2 * square(AB, BC, AC)) / a)
             h = ((2 * square(AB, BC, AC)) / a)
         case 3:
-            if y1==y3:
+            if y1 == y3:
                 xh, yh = [x2, x2], [y2, y1]
                 a = side(x1, y1, x3, y3)
                 h = ((2 * square(AB, BC, AC)) / a)
-            elif y2==y3:
+            elif y2 == y3:
                 xh, yh = [x1, x1], [y1, y2]
                 a = side(x2, y2, x3, y3)
                 h = ((2 * square(AB, BC, AC)) / a)
-            elif y1==y2:
+            elif y1 == y2:
                 xh, yh = [x3, x3], [y3, y2]
                 a = side(x2, y2, x1, y1)
                 h = ((2 * square(AB, BC, AC)) / a)
@@ -153,16 +152,16 @@ while True:
                 xh, yh = [x2, x2], [y2, y1]
                 a = side(x1, y1, x3, y3)
                 h = ((2 * square(AB, BC, AC)) / a)
-            elif y2==y3:
+            elif y2 == y3:
                 xh, yh = [x1, x1], [y1, y2]
                 a = side(x2, y2, x3, y3)
                 h = ((2 * square(AB, BC, AC)) / a)
-            elif y1==y2:
+            elif y1 == y2:
                 xh, yh = [x3, x3], [y3, y2]
                 a = side(x2, y2, x1, y1)
                 h = ((2 * square(AB, BC, AC)) / a)
             else:
-                h=0
+                h = 0
 
     print()
 
@@ -202,9 +201,9 @@ while True:
     x1, y1 = [x1, x3], [y1, y3]
 
     plt.plot(x, y, color='black', label='сторона')
-    plt.plot(x1, y1, color='black', label='сторона')
-
     plt.plot(x, y, 'o')
+
+    plt.plot(x1, y1, color='black', label='сторона')
     plt.plot(x1, y1, 'o')
 
     plt.plot(median_A_x, median_A_y, color='blue', label='медиана')
