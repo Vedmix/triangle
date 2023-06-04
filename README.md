@@ -1,4 +1,4 @@
-#Triangle
+# Triangle
 ---
 ### О программе / About
 ---
